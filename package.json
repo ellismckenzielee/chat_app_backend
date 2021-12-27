@@ -4,12 +4,14 @@
   "description": "backend for chat app ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^27.4.5"
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
