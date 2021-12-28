@@ -4,18 +4,20 @@
   "description": "backend for chat app ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon": "nodemon index.js"
+    "test": "jest",
+    "nodemon": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.4.5",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
     "fastify": "^3.25.2",
+    "fastify-mongodb": "^4.1.1",
     "mongoose": "^6.1.4"
   }
 }
