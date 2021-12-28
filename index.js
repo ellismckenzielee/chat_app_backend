@@ -1,15 +1,31 @@
-const fastify = require("fastify")({ logger: true });
+const fastify = require("fastify");
+const dotenv = require("dotenv");
 
-fastify.get("/", () => {
-  return "chat backend";
-});
+if (process.env.NODE_ENV === "test") {
+  dotenv.config({
+    path: "test.env",
+  });
+} else {
+  dotenv.config({
+    path: "prod.env",
+  });
+}
+console.log(process.env.URL);
+function build(opts = {}) {
+  const app = fastify(opts);
+  app.register(require("fastify-mongodb"), {
+    forceClose: true,
+    url: process.env.URL,
+  });
+  app.get("/", (req, res) => {
+    console.log("in route");
+    res.code(200).send({ hello: "world" });
+  });
 
-const start = async () => {
-  try {
-    await fastify.listen(4040);
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-};
-start();
+  app.get("/chats", (req, res) => {
+    return "chats page";
+  });
+  return app;
+}
+
+module.exports = build;
