@@ -1,21 +1,59 @@
+const { getUsers } = require("../models/users.models");
 async function routes(app, options) {
-  app.get("/", (req, res) => {
-    console.log("in / route");
-    res.code(200).send({ hello: "world" });
+  app.route({
+    method: "GET",
+    url: "/",
+    schema: {
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            hello: { type: "string" },
+          },
+        },
+      },
+    },
+    handler: function (request, reply) {
+      reply.send({ hello: "world" });
+    },
   });
-  app.get("/users", async (req, res) => {
-    console.log("in users route");
-    const users = app.mongo.db.collection("users");
-    const result = await users.find().sort().toArray();
-    res.code(200).send({ users: result });
+  app.route({
+    method: "GET",
+    url: "/users",
+    schema: {
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            users: { type: "array" },
+          },
+        },
+      },
+    },
+    handler: async function (request, reply) {
+      console.log("in users controller");
+      const users = await getUsers(this);
+      reply.send({ users });
+    },
   });
 
-  app.get("/chats", (req, res) => {
-    return "chats page";
-  });
-
-  app.get("*", (req, res) => {
-    res.code(404).send({ msg: "Invalid URL" });
+  app.route({
+    method: "GET",
+    url: "*",
+    schema: {
+      response: {
+        404: {
+          type: "object",
+          properties: {
+            msg: { type: "string" },
+          },
+        },
+      },
+    },
+    handler: async function (request, reply) {
+      console.log("in catch all handler");
+      reply.code(404).send({ msg: "Invalid URL" });
+    },
   });
 }
 
