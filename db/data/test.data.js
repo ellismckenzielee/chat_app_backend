@@ -5,4 +5,6 @@ const users = [
   { name: "Corey", username: "coreylee" },
 ];
 
-module.exports = users;
+const chats = [{ users: ["ellislee", "zoeharries"] }, { users: ["ellislee", "harrywaterworth"] }];
+
+module.exports = { users, chats };

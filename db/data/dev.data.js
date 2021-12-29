@@ -1,8 +1,10 @@
 const users = [
-  { name: "Ellis", username: "ellislee@gmail.com" },
-  { name: "Zoe", username: "zoeharries@gmail.com" },
-  { name: "Harry", username: "harrywaterworth@gmail.com" },
-  { name: "Corey", username: "coreylee@gmail.com" },
+  { name: "Ellis", username: "ellislee" },
+  { name: "Zoe", username: "zoeharries" },
+  { name: "Harry", username: "harrywaterworth" },
+  { name: "Corey", username: "coreylee" },
 ];
 
-module.exports = users;
+const chats = [{ users: ["ellislee", "zoeharries"] }, { user: ["ellislee", "harrywaterworth"] }];
+
+module.exports = { users, chats };
