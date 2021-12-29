@@ -2,9 +2,10 @@ const fastify = require("../index");
 const supertest = require("supertest");
 const app = fastify();
 const seed = require("../db/seed");
+const data = require("../db/data/test.data");
 const { mongoose } = require("../db/connection");
 beforeEach(() => {
-  return seed();
+  return seed(data);
 });
 afterAll(() => {
   app.close();
@@ -29,12 +30,13 @@ describe("testing server endpoints: ", () => {
   });
   describe("/users", () => {
     describe("GET", () => {
-      it("status: 200, responds with JSON data decribing endpoints", async () => {
+      it("status: 200, responds with array of users", async () => {
         await app.ready();
         return supertest(app.server)
           .get("/users")
           .expect(200)
           .then(({ body }) => {
+            console.log(body);
             const { users } = body;
             expect(users.length).toBe(4);
           });
