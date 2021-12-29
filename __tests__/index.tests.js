@@ -53,4 +53,19 @@ describe("testing server endpoints: ", () => {
       });
     });
   });
+  describe("/:username/chats", () => {
+    describe("GET", () => {
+      it("status: 200, responds with an array of chats", async () => {
+        const username = "ellislee";
+        await app.ready();
+        return supertest(app.server)
+          .get(`/${username}/chats`)
+          .expect(200)
+          .then(({ body }) => {
+            const { chats } = body;
+            expect(chats.length).toBe(2);
+          });
+      });
+    });
+  });
 });
