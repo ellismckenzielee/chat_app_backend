@@ -18,6 +18,8 @@
     "dotenv": "^10.0.0",
     "fastify": "^3.25.2",
     "fastify-mongodb": "^4.1.1",
-    "mongoose": "^6.1.4"
+    "fastify-socket.io": "^3.0.0",
+    "mongoose": "^6.1.4",
+    "socket.io": "^4.4.0"
   }
 }
