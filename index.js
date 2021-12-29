@@ -1,16 +1,6 @@
 const fastify = require("fastify");
-const dotenv = require("dotenv");
+const { mongoose, User } = require("./db/connection");
 
-if (process.env.NODE_ENV === "test") {
-  dotenv.config({
-    path: "test.env",
-  });
-} else {
-  dotenv.config({
-    path: "prod.env",
-  });
-}
-console.log(process.env.URL);
 function build(opts = {}) {
   const app = fastify(opts);
   app.register(require("fastify-mongodb"), {
@@ -21,7 +11,18 @@ function build(opts = {}) {
     console.log("in route");
     res.code(200).send({ hello: "world" });
   });
+  app.get("/users", (req, res) => {
+    console.log("in users route");
 
+    console.log("pasy uef");
+    User.find()
+      .then((res) => {
+        return res;
+      })
+      .then((users) => {
+        res.code(200).send({ users });
+      });
+  });
   app.get("/chats", (req, res) => {
     return "chats page";
   });
