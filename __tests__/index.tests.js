@@ -22,7 +22,7 @@ describe("testing server endpoints: ", () => {
           .get("/")
           .expect(200)
           .then(({ body }) => {
-            console.log("RES", body);
+            expect(typeof body).toBe("object");
           });
       });
     });
@@ -35,7 +35,18 @@ describe("testing server endpoints: ", () => {
           .get("/users")
           .expect(200)
           .then(({ body }) => {
-            console.log("RES", body);
+            const { users } = body;
+            expect(users.length).toBe(4);
+          });
+      });
+      it("status: 404, responds with Invalid URL", async () => {
+        await app.ready();
+        return supertest(app.server)
+          .get("/userss")
+          .expect(404)
+          .then(({ body }) => {
+            const { msg } = body;
+            expect(msg).toBe("Invalid URL");
           });
       });
     });

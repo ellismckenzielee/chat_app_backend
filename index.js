@@ -8,13 +8,11 @@ function build(opts = {}) {
     url: process.env.URL,
   });
   app.get("/", (req, res) => {
-    console.log("in route");
+    console.log("in / route");
     res.code(200).send({ hello: "world" });
   });
   app.get("/users", (req, res) => {
     console.log("in users route");
-
-    console.log("pasy uef");
     User.find()
       .then((res) => {
         return res;
@@ -23,8 +21,13 @@ function build(opts = {}) {
         res.code(200).send({ users });
       });
   });
+
   app.get("/chats", (req, res) => {
     return "chats page";
+  });
+
+  app.get("*", (req, res) => {
+    res.code(404).send({ msg: "Invalid URL" });
   });
   return app;
 }
