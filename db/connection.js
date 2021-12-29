@@ -12,5 +12,5 @@ if (process.env.NODE_ENV === "test") {
 }
 mongoose.connect(process.env.URL);
 const User = mongoose.model("User", { name: String, username: String });
-
-module.exports = { mongoose, User };
+const Chat = mongoose.model("Chat", { users: Array });
+module.exports = { mongoose, User, Chat };
