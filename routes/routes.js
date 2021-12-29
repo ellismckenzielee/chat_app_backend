@@ -1,4 +1,5 @@
 const { getUsers } = require("../models/users.models");
+const { getChatsByUsername } = require("../models/chats.models");
 async function routes(app, options) {
   app.route({
     method: "GET",
@@ -36,7 +37,26 @@ async function routes(app, options) {
       reply.send({ users });
     },
   });
-
+  app.route({
+    method: "GET",
+    url: "/:username/chats",
+    schema: {
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            chats: { type: "array" },
+          },
+        },
+      },
+    },
+    handler: async function (request, reply) {
+      const { username } = request.params;
+      const chats = await getChatsByUsername(this, username);
+      console.log(chats);
+      reply.code(200).send({ chats });
+    },
+  });
   app.route({
     method: "GET",
     url: "*",
