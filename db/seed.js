@@ -1,6 +1,6 @@
-const { mongoose, User, Chat } = require("../db/connection");
+const { mongoose, User, Chat, Message } = require("../db/connection");
 
-function seedDb({ users, chats }) {
+function seedDb({ users, chats, messages }) {
   return User.collection
     .drop()
     .then(() => {
@@ -10,9 +10,13 @@ function seedDb({ users, chats }) {
       return Chat.collection.drop();
     })
     .then(() => {
-      console.log(chats);
       return Chat.insertMany(chats);
     })
-    .then(console.log);
+    .then(() => {
+      return Message.collection.drop();
+    })
+    .then(() => {
+      return Message.insertMany(messages);
+    });
 }
 module.exports = seedDb;
