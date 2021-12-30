@@ -50,6 +50,22 @@ describe("testing server endpoints: ", () => {
           });
       });
     });
+    describe("POST", () => {
+      it("status: 201, responds with array of users", async () => {
+        const newUser = {
+          name: "jamie",
+          username: "jamielee",
+        };
+        await app.ready();
+        return supertest(app.server)
+          .post("/users")
+          .send({ user: newUser })
+          .expect(201)
+          .then(({ body }) => {
+            const { user } = body;
+          });
+      });
+    });
   });
   describe("/:username/chats", () => {
     describe("GET", () => {
