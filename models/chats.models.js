@@ -17,4 +17,10 @@ async function getMessagesByChatId(app, chatId) {
     .toArray();
   return result;
 }
+
+async function postMessage(app, message) {
+  const messages = app.mongo.db.collection("messages");
+  const newMessage = await messages.insertOne({ chatId: message.chatId, sender: message.sender, message: message.message, sent: new Date() });
+  return newMessage;
+}
 module.exports = { getChatsByUsername, getMessagesByChatId };
