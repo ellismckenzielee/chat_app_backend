@@ -29,7 +29,14 @@ async function userRoutes(app, options, done) {
         201: {
           type: "object",
           properties: {
-            user: { type: "object" },
+            user: {
+              type: "object",
+              properties: {
+                name: { type: "string" },
+                username: { type: "string" },
+                _id: { type: "string" },
+              },
+            },
           },
         },
       },
@@ -38,6 +45,7 @@ async function userRoutes(app, options, done) {
       console.log("in post user controller");
       const { user } = request.body;
       const newUser = await postUser(this, user);
+      console.log("newuser2", newUser);
       reply.code(201).send({ user: newUser });
     },
   });

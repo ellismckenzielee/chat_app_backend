@@ -63,6 +63,9 @@ describe("testing server endpoints: ", () => {
           .expect(201)
           .then(({ body }) => {
             const { user } = body;
+            expect(user.name).toBe(newUser.name);
+            expect(user.username).toBe(newUser.username);
+            expect(typeof user._id).toBe("string");
           });
       });
     });
