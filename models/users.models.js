@@ -4,4 +4,9 @@ async function getUsers(app) {
   return result;
 }
 
-module.exports = { getUsers };
+async function postUser(app, user) {
+  const users = app.mongo.db.collection("users");
+  const newUser = users.insert(user);
+  return newUser;
+}
+module.exports = { getUsers, postUser };
