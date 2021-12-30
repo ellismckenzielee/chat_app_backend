@@ -17,7 +17,6 @@ async function chatRoutes(app, options) {
     handler: async function (request, reply) {
       const { username } = request.params;
       const chats = await getChatsByUsername(this, username);
-      console.log(chats);
       reply.code(200).send({ chats });
     },
   });

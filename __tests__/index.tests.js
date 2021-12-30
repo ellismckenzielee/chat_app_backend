@@ -13,7 +13,6 @@ afterAll(() => {
 });
 
 beforeEach(() => {});
-console.log("ROUTES", app.server);
 describe("testing server endpoints: ", () => {
   describe("/", () => {
     describe("GET", () => {
@@ -36,7 +35,6 @@ describe("testing server endpoints: ", () => {
           .get("/users")
           .expect(200)
           .then(({ body }) => {
-            console.log(body);
             const { users } = body;
             expect(users.length).toBe(4);
           });
@@ -78,7 +76,6 @@ describe("testing server endpoints: ", () => {
           .get(`/${username}/chats/${chatId}`)
           .expect(200)
           .then(({ body }) => {
-            console.log("BODY", body);
             const { messages } = body;
             expect(messages.length).toBe(3);
           });
