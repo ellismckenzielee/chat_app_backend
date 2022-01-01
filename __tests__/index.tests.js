@@ -76,8 +76,13 @@ describe("testing server endpoints: ", () => {
         await app.ready();
         return supertest(app.server).post("/users").send({ user: newUser }).expect(400);
       });
-      it("status: 400, responds with message: bad request when passed object of incorrect data type", async () => {
+      it("status: 400, responds with message: bad request when passed object of incorrect data type (string)", async () => {
         const newUser = "jamie";
+        await app.ready();
+        return supertest(app.server).post("/users").send({ user: newUser }).expect(400);
+      });
+      it("status: 400, responds with message: bad request when passed object of incorrect data type (number)", async () => {
+        const newUser = 1234;
         await app.ready();
         return supertest(app.server).post("/users").send({ user: newUser }).expect(400);
       });
