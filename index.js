@@ -7,12 +7,12 @@ function build(opts = {}) {
   const app = fastify(opts);
 
   app.register(require("fastify-cors"), {
-    origin: "http://localhost:5500",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   });
   app.register(require("fastify-socket.io"), {
-    origin: "http://localhost:5500",
+    origin: "http://localhost:3000",
   });
   app.register(dbConnector);
 
