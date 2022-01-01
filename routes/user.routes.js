@@ -24,7 +24,7 @@ async function userRoutes(app, options, done) {
     method: "POST",
     url: "/users",
     schema: {
-      body: { user: { type: "object" } },
+      body: { user: { type: "object", name: { type: "string" }, username: { type: "string" }, required: ["name", "username"] } },
       response: {
         201: {
           type: "object",
@@ -45,7 +45,6 @@ async function userRoutes(app, options, done) {
       console.log("in post user controller");
       const { user } = request.body;
       const newUser = await postUser(this, user);
-      console.log("newuser2", newUser);
       reply.code(201).send({ user: newUser });
     },
   });
