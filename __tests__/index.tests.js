@@ -68,6 +68,14 @@ describe("testing server endpoints: ", () => {
             expect(typeof user._id).toBe("string");
           });
       });
+      it("status: 400, responds with message: bad request when passed object with missing data", async () => {
+        const newUser = {
+          name: "jamie",
+          phoneNumber: "07875255423",
+        };
+        await app.ready();
+        return supertest(app.server).post("/users").send({ user: newUser }).expect(400);
+      });
     });
   });
   describe("/:username/chats", () => {
