@@ -4,7 +4,7 @@ const server = require("./index")({
   },
 });
 
-server.listen(3000, (err, address) => {
+server.listen(4500, (err, address) => {
   console.log(server.printRoutes());
   if (err) {
     server.log.error(err);
