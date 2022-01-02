@@ -12,11 +12,28 @@ function seedDb({ users, chats, messages }) {
     .then(() => {
       return Chat.insertMany(chats);
     })
-    .then(() => {
-      return Message.collection.drop();
+    .then((response) => {
+      console.log(response);
+
+      return Promise.all([response, Message.collection.drop()]);
     })
-    .then(() => {
+    .then(([data]) => {
+      if (!process.env.NODE_ENV) {
+        console.log(data[0]._id.toString());
+        messages = messages.map((message, indx) => {
+          if (indx < 3) {
+            message.chatId = data[0]._id.toString();
+          } else {
+            message.chatId = data[1]._id.toString();
+          }
+          return message;
+        });
+      }
+      console.log(messages);
       return Message.insertMany(messages);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 }
 module.exports = seedDb;
