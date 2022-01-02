@@ -10,10 +10,7 @@ async function getChatsByUsername(app, username) {
 async function getMessagesByChatId(app, chatId) {
   console.log("in getMessagesByChatId");
   const messages = app.mongo.db.collection("messages");
-  const result = await messages
-    .find({ chatId: parseInt(chatId) })
-    .sort()
-    .toArray();
+  const result = await messages.find({ chatId: chatId }).sort().toArray();
   return result;
 }
 
