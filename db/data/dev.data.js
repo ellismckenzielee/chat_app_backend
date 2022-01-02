@@ -7,4 +7,11 @@ const users = [
 
 const chats = [{ users: ["ellislee", "zoeharries"] }, { users: ["ellislee", "harrywaterworth"] }];
 
-module.exports = { users, chats };
+const messages = [
+  { sender: "ellislee", message: "Hello from Ellis!", sent: new Date() },
+  { sender: "zoeharries", message: "Hello Ellis!!!", sent: new Date() },
+  { sender: "ellislee", message: "Good morning Harry.", sent: new Date() },
+  { sender: "ellislee", message: "Welcome to the warzone!", sent: new Date() },
+  { sender: "harrywaterworth", message: "Morning.", sent: new Date() },
+];
+module.exports = { users, chats, messages };
