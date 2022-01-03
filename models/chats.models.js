@@ -19,4 +19,4 @@ async function postMessage(app, message) {
   const newMessage = await messages.insertOne({ chatId: message.chatId, sender: message.sender, message: message.message, sent: new Date() });
   return newMessage;
 }
-module.exports = { getChatsByUsername, getMessagesByChatId };
+module.exports = { getChatsByUsername, getMessagesByChatId, postMessage };
