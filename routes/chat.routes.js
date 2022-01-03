@@ -36,7 +36,6 @@ async function chatRoutes(app, options) {
     handler: async function (request, reply) {
       const { username, chatId } = request.params;
       const messages = await getMessagesByChatId(this, chatId);
-      console.log("MESSAGES", messages);
       reply.code(200).send({ messages });
     },
   });
