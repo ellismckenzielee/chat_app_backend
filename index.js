@@ -1,5 +1,6 @@
 const fastify = require("fastify");
 const dbConnector = require("./db/db-connector");
+const socketsPlugins = require("./plugins/sockets.plugins");
 const chatRoutes = require("./routes/chat.routes");
 const routes = require("./routes/general.routes");
 const userRoutes = require("./routes/user.routes");
@@ -15,7 +16,7 @@ function build(opts = {}) {
     origin: "http://localhost:3000",
   });
   app.register(dbConnector);
-
+  app.register(socketsPlugins);
   app.register(userRoutes);
   app.register(chatRoutes);
   app.register(routes);
