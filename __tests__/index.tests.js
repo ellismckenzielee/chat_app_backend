@@ -102,11 +102,10 @@ describe("testing server endpoints: ", () => {
           });
       });
     });
-    describe.only("POST", () => {
+    describe("POST", () => {
       it("status: 201, responds with new chatId", async () => {
         const username = "ellislee";
         const recipientUsername = "eddievedder";
-        await app.ready();
         await app.ready();
         return supertest(app.server)
           .post(`/${username}/chats`)
@@ -115,6 +114,19 @@ describe("testing server endpoints: ", () => {
           .then(({ body }) => {
             const { chatId } = body;
             expect(typeof chatId).toBe("string");
+          });
+      });
+      it.only("status: 404, responds with user not found if recipient does not exist", async () => {
+        const username = "ellislee";
+        const recipientUsername = "flea";
+        await app.ready();
+        return supertest(app.server)
+          .post(`/${username}/chats`)
+          .send({ recipientUsername })
+          .expect(404)
+          .then(({ body }) => {
+            const { msg } = body;
+            expect(msg).toBe("recipient does not exist");
           });
       });
     });

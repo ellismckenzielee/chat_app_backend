@@ -3,6 +3,7 @@ const users = [
   { name: "Zoe", username: "zoeharries" },
   { name: "Harry", username: "harrywaterworth" },
   { name: "Corey", username: "coreylee" },
+  { name: "Eddie", username: "eddivedder" },
 ];
 
 const chats = [
