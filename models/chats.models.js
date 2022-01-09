@@ -19,4 +19,10 @@ async function postMessage(app, message) {
   const newMessage = await messages.insertOne({ chatId: message.chatId, sender: message.sender, message: message.message, sent: new Date() });
   return newMessage;
 }
-module.exports = { getChatsByUsername, getMessagesByChatId, postMessage };
+
+async function postChat(app, username, recipientUsername) {
+  const chats = app.mongo.db.collection("chats");
+  const chat = await chats.insertOne({ users: [username, recipientUsername] });
+  return chat.insertedId.toString();
+}
+module.exports = { getChatsByUsername, getMessagesByChatId, postMessage, postChat };
