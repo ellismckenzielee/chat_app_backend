@@ -18,7 +18,11 @@ const socketPlugin = async (fastify, options) => {
     socket.on("message", async (message) => {
       console.log("message", message);
       const response = await postMessage(fastify, message);
-      console.log("RESPONSE", response);
+      console.log("RESPONSE", response.insertedId.toString());
+      message._id = response.insertedId.toString();
+      console.log(message);
+      fastify.io.to(socket.room).emit("message", message);
+      console.log("emitted");
     });
   });
 };
