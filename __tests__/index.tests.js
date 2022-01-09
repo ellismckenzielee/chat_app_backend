@@ -142,7 +142,13 @@ describe("testing server endpoints: ", () => {
             expect(msg).toBe("chat already exists");
           });
       });
-      it.only("status: 400, missing recipientUsername in body", async () => {
+      it("status: 400, recipientUsername of type integer", async () => {
+        const username = "ellislee";
+        const recipientUsername = 123;
+        await app.ready();
+        return supertest(app.server).post(`/${username}/chats`).send({ recipientUsername }).expect(400);
+      });
+      it("status: 400, missing recipientUsername in body", async () => {
         const username = "ellislee";
         await app.ready();
         return supertest(app.server).post(`/${username}/chats`).expect(400);
