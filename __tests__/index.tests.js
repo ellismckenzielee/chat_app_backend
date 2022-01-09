@@ -36,7 +36,7 @@ describe("testing server endpoints: ", () => {
           .expect(200)
           .then(({ body }) => {
             const { users } = body;
-            expect(users.length).toBe(4);
+            expect(users.length).toBe(5);
           });
       });
       it("status: 404, responds with Invalid URL", async () => {
@@ -102,10 +102,10 @@ describe("testing server endpoints: ", () => {
           });
       });
     });
-    describe("POST", () => {
+    describe.only("POST", () => {
       it("status: 201, responds with new chatId", async () => {
         const username = "ellislee";
-        const recipientUsername = "eddievedder";
+        const recipientUsername = "coreylee";
         await app.ready();
         return supertest(app.server)
           .post(`/${username}/chats`)
@@ -116,7 +116,7 @@ describe("testing server endpoints: ", () => {
             expect(typeof chatId).toBe("string");
           });
       });
-      it.only("status: 404, responds with user not found if recipient does not exist", async () => {
+      it("status: 404, responds with user not found if recipient does not exist", async () => {
         const username = "ellislee";
         const recipientUsername = "flea";
         await app.ready();
@@ -129,7 +129,7 @@ describe("testing server endpoints: ", () => {
             expect(msg).toBe("recipient does not exist");
           });
       });
-      it.only("status: 400, responds with chat already exists", async () => {
+      it("status: 400, responds with chat already exists", async () => {
         const username = "ellislee";
         const recipientUsername = "zoeharries";
         await app.ready();
@@ -141,6 +141,11 @@ describe("testing server endpoints: ", () => {
             const { msg } = body;
             expect(msg).toBe("chat already exists");
           });
+      });
+      it.only("status: 400, missing recipientUsername in body", async () => {
+        const username = "ellislee";
+        await app.ready();
+        return supertest(app.server).post(`/${username}/chats`).expect(400);
       });
     });
   });
