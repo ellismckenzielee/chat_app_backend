@@ -129,6 +129,19 @@ describe("testing server endpoints: ", () => {
             expect(msg).toBe("recipient does not exist");
           });
       });
+      it.only("status: 400, responds with chat already exists", async () => {
+        const username = "ellislee";
+        const recipientUsername = "zoeharries";
+        await app.ready();
+        return supertest(app.server)
+          .post(`/${username}/chats`)
+          .send({ recipientUsername })
+          .expect(400)
+          .then(({ body }) => {
+            const { msg } = body;
+            expect(msg).toBe("chat already exists");
+          });
+      });
     });
   });
   describe("/:username/chats/:chatId", () => {
