@@ -22,6 +22,12 @@ async function postMessage(app, message) {
 
 async function postChat(app, username, recipientUsername) {
   const chats = app.mongo.db.collection("chats");
+  const users = app.mongo.db.collection("users");
+  const user = await users.find({ username: recipientUsername }).sort().toArray();
+  if (user.length === 0) {
+    return Promise.reject({ code: 404, msg: "recipient does not exist" });
+  }
+  console.log(user);
   const chat = await chats.insertOne({ users: [username, recipientUsername] });
   return chat.insertedId.toString();
 }
