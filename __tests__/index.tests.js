@@ -102,6 +102,22 @@ describe("testing server endpoints: ", () => {
           });
       });
     });
+    describe.only("POST", () => {
+      it("status: 201, responds with new chatId", async () => {
+        const username = "ellislee";
+        const recipientUsername = "eddievedder";
+        await app.ready();
+        await app.ready();
+        return supertest(app.server)
+          .post(`/${username}/chats`)
+          .send({ recipientUsername })
+          .expect(201)
+          .then(({ body }) => {
+            const { chatId } = body;
+            expect(typeof chatId).toBe("string");
+          });
+      });
+    });
   });
   describe("/:username/chats/:chatId", () => {
     describe("GET", () => {
