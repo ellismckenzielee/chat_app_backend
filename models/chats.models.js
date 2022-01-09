@@ -24,7 +24,10 @@ async function postChat(app, username, recipientUsername) {
   const chats = app.mongo.db.collection("chats");
   const users = app.mongo.db.collection("users");
   const user = await users.find({ username: recipientUsername }).sort().toArray();
-  const existingChats = await chats.find({ users: username }).sort().toArray();
+  const existingChats = await chats
+    .find({ users: { $all: [username, recipientUsername], $size: 2 } })
+    .sort()
+    .toArray();
   if (user.length === 0) {
     return Promise.reject({ code: 404, msg: "recipient does not exist" });
   } else if (existingChats.length > 0) {

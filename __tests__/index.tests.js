@@ -102,7 +102,7 @@ describe("testing server endpoints: ", () => {
           });
       });
     });
-    describe.only("POST", () => {
+    describe("POST", () => {
       it("status: 201, responds with new chatId", async () => {
         const username = "ellislee";
         const recipientUsername = "coreylee";
