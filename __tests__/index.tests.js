@@ -88,6 +88,22 @@ describe("testing server endpoints: ", () => {
       });
     });
   });
+  describe("/users/:username", () => {
+    describe("GET", () => {
+      it("status: 200, responds with user object", async () => {
+        const username = "ellislee";
+        await app.ready();
+        return supertest(app.server)
+          .get(`/users/${username}`)
+          .expect(200)
+          .then(({ body }) => {
+            const { user } = body;
+            expect(user.username).toBe(username);
+            expect(typeof user.name).toBe("string");
+          });
+      });
+    });
+  });
   describe("/:username/chats", () => {
     describe("GET", () => {
       it("status: 200, responds with an array of chats", async () => {
