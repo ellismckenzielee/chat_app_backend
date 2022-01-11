@@ -6,9 +6,15 @@ if (process.env.NODE_ENV === "test") {
     path: "test.env",
   });
 } else {
-  dotenv.config({
-    path: "prod.env",
-  });
+  if (process.env.DBURL) {
+    dotenv.config({
+      path: "prod.env",
+    });
+  } else {
+    dotenv.config({
+      path: "prod.env",
+    });
+  }
 }
 mongoose.connect(process.env.URL);
 const User = mongoose.model("User", { name: String, username: String });
