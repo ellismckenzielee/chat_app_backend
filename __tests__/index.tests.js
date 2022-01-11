@@ -102,6 +102,17 @@ describe("testing server endpoints: ", () => {
             expect(typeof user.name).toBe("string");
           });
       });
+      it("status: 404, responds with message user not found", () => {
+        const username = "ellislee2";
+        await app.ready();
+        return supertest(app.server)
+          .get(`/users/${username}`)
+          .expect(404)
+          .then(({ body }) => {
+            const { msg } = body;
+            expect(msg).toBe("user not found");
+          });
+      });
     });
   });
   describe("/:username/chats", () => {
