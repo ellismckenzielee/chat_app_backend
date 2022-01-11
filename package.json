@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "start": "node server.js",
     "nodemon": "nodemon server.js",
     "seedDev": "node db/run_seed.js"
+  },
+  "engines": {
+    "node": "12.21.0"
   },
   "author": "",
   "license": "ISC",
