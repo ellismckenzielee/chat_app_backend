@@ -102,7 +102,7 @@ describe("testing server endpoints: ", () => {
             expect(typeof user.name).toBe("string");
           });
       });
-      it("status: 404, responds with message user not found", () => {
+      it("status: 404, responds with message user not found", async () => {
         const username = "ellislee2";
         await app.ready();
         return supertest(app.server)
