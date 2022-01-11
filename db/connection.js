@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "test") {
 } else {
   if (process.env.DBURL) {
     dotenv.config({
-      path: "prod.env",
+      path: process.env.DBURL,
     });
   } else {
     dotenv.config({
