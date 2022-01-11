@@ -16,6 +16,9 @@ async function getUserByUsername(app, username) {
   const users = app.mongo.db.collection("users");
   console.log(username);
   const user = await users.findOne({ username: username });
+  if (!user) {
+    return Promise.reject({ code: 404, msg: "user not found" });
+  }
   return user;
 }
 module.exports = { getUsers, postUser, getUserByUsername };

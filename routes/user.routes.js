@@ -64,9 +64,13 @@ async function userRoutes(app, options, done) {
     handler: async function (request, reply) {
       console.log("in user controller");
       const { username } = request.params;
-      const user = await getUserByUsername(this, username);
-      console.log(user);
-      reply.send({ user });
+      try {
+        const user = await getUserByUsername(this, username);
+        console.log(user);
+        reply.send({ user });
+      } catch (err) {
+        reply.code(err.code).send({ msg: err.msg });
+      }
     },
   });
 }
