@@ -1,22 +1,18 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-
+console.log(process.env);
 if (process.env.NODE_ENV === "test") {
   dotenv.config({
     path: "test.env",
   });
 } else {
-  if (process.env.DBURL) {
-    dotenv.config({
-      path: process.env.DBURL,
-    });
-  } else {
-    dotenv.config({
-      path: "prod.env",
-    });
-  }
+  dotenv.config({
+    path: "prod.env",
+  });
 }
-mongoose.connect(process.env.URL);
+
+const url = process.env.URL || process.env.DBURL;
+mongoose.connect(url);
 const User = mongoose.model("User", { name: String, username: String });
 const Chat = mongoose.model("Chat", { users: Array, chatId: Number });
 const Message = mongoose.model("Message", { chatId: String, sender: "string", message: "string", sent: Date });
