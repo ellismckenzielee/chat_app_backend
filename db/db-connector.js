@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "test") {
 async function dbConnector(fastify, options) {
   console.log(process.env.URL);
   fastify.register(require("fastify-mongodb"), {
-    url: process.env.URL,
+    url: process.env.URL || process.env.DBURL,
   });
 }
 
