@@ -11,4 +11,11 @@ async function postUser(app, user) {
   const newUser = await users.findOne({ _id: id });
   return newUser;
 }
-module.exports = { getUsers, postUser };
+
+async function getUserByUsername(app, username) {
+  const users = app.mongo.db.collection("users");
+  console.log(username);
+  const user = await users.findOne({ username: username });
+  return user;
+}
+module.exports = { getUsers, postUser, getUserByUsername };

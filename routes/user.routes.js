@@ -1,4 +1,4 @@
-const { getUsers, postUser } = require("../models/users.models");
+const { getUsers, postUser, getUserByUsername } = require("../models/users.models");
 
 async function userRoutes(app, options, done) {
   app.route({
@@ -46,6 +46,27 @@ async function userRoutes(app, options, done) {
       const { user } = request.body;
       const newUser = await postUser(this, user);
       reply.code(201).send({ user: newUser });
+    },
+  });
+  app.route({
+    method: "GET",
+    url: "/users/:username",
+    schema: {
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            user: { type: "object", properties: { _id: { type: "string" }, name: { type: "string" }, username: { type: "string" } } },
+          },
+        },
+      },
+    },
+    handler: async function (request, reply) {
+      console.log("in user controller");
+      const { username } = request.params;
+      const user = await getUserByUsername(this, username);
+      console.log(user);
+      reply.send({ user });
     },
   });
 }
