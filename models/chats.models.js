@@ -16,11 +16,17 @@ async function getMessagesByChatId(app, chatId) {
 
 async function postMessage(app, message) {
   const messages = app.mongo.db.collection("messages");
-  const newMessage = await messages.insertOne({ chatId: message.chatId, sender: message.sender, message: message.message, sent: new Date() });
+  const newMessage = await messages.insertOne({
+    chatId: message.chatId,
+    sender: message.sender,
+    message: message.message,
+    sent: new Date(),
+  });
   return newMessage;
 }
 
 async function postChat(app, username, recipientUsername) {
+  console.log("in post chat model");
   const chats = app.mongo.db.collection("chats");
   const users = app.mongo.db.collection("users");
   const user = await users.find({ username: recipientUsername }).sort().toArray();
@@ -35,6 +41,7 @@ async function postChat(app, username, recipientUsername) {
   }
   console.log(user);
   const chat = await chats.insertOne({ users: [username, recipientUsername] });
-  return chat.insertedId.toString();
+  console.log({ chatId: chat.insertedId.toString(), users: [username, recipientUsername] });
+  return { chatId: chat.insertedId.toString(), users: [username, recipientUsername] };
 }
 module.exports = { getChatsByUsername, getMessagesByChatId, postMessage, postChat };
