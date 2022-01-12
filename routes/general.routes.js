@@ -15,7 +15,10 @@ async function routes(app, options) {
       },
     },
     handler: function (request, reply) {
-      reply.send({ hello: "world" });
+      console.log("IN ROUTE HANDLER");
+      const routes = JSON.stringify(require("./routes.info"));
+      console.log("ROUTES", routes);
+      reply.send(routes);
     },
   });
 
