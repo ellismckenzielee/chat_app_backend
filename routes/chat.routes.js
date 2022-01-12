@@ -49,14 +49,6 @@ async function chatRoutes(app, options) {
           recipientUsername: { type: "string" },
         },
       },
-      response: {
-        201: {
-          type: "object",
-          properties: {
-            chatId: { type: "string" },
-          },
-        },
-      },
     },
     handler: async function (request, reply) {
       console.log("In post chat route");
@@ -65,9 +57,10 @@ async function chatRoutes(app, options) {
       console.log(username, recipientUsername);
       console.log(typeof recipientUsername);
       try {
-        const chatId = await postChat(this, username, recipientUsername);
-        console.log(chatId);
-        reply.code(201).send({ chatId });
+        console.log(true);
+        const chat = await postChat(this, username, recipientUsername);
+        console.log("CHAT", chat);
+        reply.code(201).send({ chat });
       } catch (err) {
         console.log(err);
         reply.code(err.code).send({ msg: err.msg });
