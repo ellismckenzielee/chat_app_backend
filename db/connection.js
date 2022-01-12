@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-console.log(process.env);
+console.log("PROCESS ENV", process.env);
 if (process.env.NODE_ENV === "test") {
   dotenv.config({
     path: "test.env",

@@ -5,7 +5,7 @@ const server = require("./index")({
 });
 
 server.listen(process.env.PORT || 4500, (err, address) => {
-  console.log(server.printRoutes());
+  console.log("SERVER", process.env.PORT, server.printRoutes());
   if (err) {
     server.log.error(err);
     process.exit(1);
