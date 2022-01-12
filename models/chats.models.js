@@ -42,6 +42,6 @@ async function postChat(app, username, recipientUsername) {
   console.log(user);
   const chat = await chats.insertOne({ users: [username, recipientUsername] });
   console.log({ chatId: chat.insertedId.toString(), users: [username, recipientUsername] });
-  return { chatId: chat.insertedId.toString(), users: [username, recipientUsername] };
+  return { _id: chat.insertedId.toString(), users: [username, recipientUsername] };
 }
 module.exports = { getChatsByUsername, getMessagesByChatId, postMessage, postChat };

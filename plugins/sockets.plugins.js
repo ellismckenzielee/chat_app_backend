@@ -46,9 +46,13 @@ const socketPlugin = async (fastify, options) => {
       console.log(message);
       fastify.io.to(socket.room).emit("message", message);
     });
-    socket.on("chat", (chat) => {
-      console.log("new chat", chat);
-      fastify.io.emit("chat", "chatId");
+    socket.on("chat", ({ username, chat }) => {
+      Object.keys(clientPool).forEach((key) => {
+        if (chat.users.includes(key)) {
+          console.log(key);
+          socket.to(clientPool[key]).emit("chat", chat);
+        }
+      });
     });
   });
 };
