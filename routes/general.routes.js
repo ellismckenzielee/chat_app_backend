@@ -4,21 +4,12 @@ async function routes(app, options) {
   app.route({
     method: "GET",
     url: "/",
-    schema: {
-      response: {
-        200: {
-          type: "object",
-          properties: {
-            hello: { type: "string" },
-          },
-        },
-      },
-    },
+
     handler: function (request, reply) {
       console.log("IN ROUTE HANDLER");
-      const routes = JSON.stringify(require("./routes.info"));
+      const routes = require("./routes.info");
       console.log("ROUTES", routes);
-      reply.send(routes);
+      reply.code(200).send({ routes });
     },
   });
 
