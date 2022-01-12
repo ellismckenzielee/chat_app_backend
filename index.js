@@ -16,7 +16,7 @@ function build(
   const app = fastify(opts);
 
   app.register(require("fastify-cors"), {
-    origin: "http://localhost:3000",
+    origins: ["http://localhost:3000", "https://61df2cdd2022582b7213f064--naughty-meninsky-63ca15.netlify.app/"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   });
