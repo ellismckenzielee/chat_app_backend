@@ -24,7 +24,14 @@ async function userRoutes(app, options, done) {
     method: "POST",
     url: "/users",
     schema: {
-      body: { user: { type: "object", name: { type: "string" }, username: { type: "string" }, required: ["name", "username"] } },
+      body: {
+        user: {
+          type: "object",
+          name: { type: "string" },
+          username: { type: "string" },
+          required: ["name", "username"],
+        },
+      },
       response: {
         201: {
           type: "object",
@@ -56,7 +63,15 @@ async function userRoutes(app, options, done) {
         200: {
           type: "object",
           properties: {
-            user: { type: "object", properties: { _id: { type: "string" }, name: { type: "string" }, username: { type: "string" } } },
+            user: {
+              type: "object",
+              properties: {
+                _id: { type: "string" },
+                img: { type: "string" },
+                name: { type: "string" },
+                username: { type: "string" },
+              },
+            },
           },
         },
       },
