@@ -1,10 +1,10 @@
 const users = [
-  { name: "Ellis", username: "ellislee" },
-  { name: "Zoe", username: "zoeharries" },
-  { name: "Harry", username: "harrywaterworth" },
-  { name: "Corey", username: "coreylee" },
-  { name: "eddie", username: "eddievedder" },
-  { name: "batman", username: "batman" },
+  { name: "Ellis", username: "ellislee", img: "" },
+  { name: "Zoe", username: "zoeharries", img: "" },
+  { name: "Harry", username: "harrywaterworth", img: "" },
+  { name: "Corey", username: "coreylee", img: "" },
+  { name: "eddie", username: "eddievedder", img: "" },
+  { name: "batman", username: "batman", img: "" },
 ];
 
 const chats = [{ users: ["ellislee", "zoeharries"] }, { users: ["ellislee", "harrywaterworth"] }];
