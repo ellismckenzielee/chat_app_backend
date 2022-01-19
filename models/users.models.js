@@ -7,6 +7,10 @@ async function getUsers(app) {
 async function postUser(app, user) {
   const users = app.mongo.db.collection("users");
   console.log(user);
+  const foundUser = await users.findOne({ username: user.username });
+  if (foundUser) {
+    return Promise.reject({ code: 409, msg: "user already exists" });
+  }
   const { insertedId: id } = await users.insertOne(user);
   const newUser = await users.findOne({ _id: id });
   return newUser;

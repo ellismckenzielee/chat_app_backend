@@ -51,8 +51,13 @@ async function userRoutes(app, options, done) {
     handler: async function (request, reply) {
       console.log("in post user controller");
       const { user } = request.body;
-      const newUser = await postUser(this, user);
-      reply.code(201).send({ user: newUser });
+      try {
+        const newUser = await postUser(this, user);
+        reply.code(201).send({ user: newUser });
+      } catch (err) {
+        console.log(err);
+        reply.code(err.code).send({ msg: err.msg });
+      }
     },
   });
   app.route({
