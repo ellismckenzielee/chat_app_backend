@@ -65,18 +65,12 @@ async function chatRoutes(app, options) {
       },
     },
     handler: async function (request, reply) {
-      console.log("In post chat route");
       const { username } = request.params;
       const { recipientUsername } = request.body;
-      console.log(username, recipientUsername);
-      console.log(typeof recipientUsername);
       try {
-        console.log(true);
         const chat = await postChat(this, username, recipientUsername);
-        console.log("CHAT", chat);
         reply.code(201).send({ chat });
       } catch (err) {
-        console.log(err);
         reply.code(err.code).send({ msg: err.msg });
       }
     },
