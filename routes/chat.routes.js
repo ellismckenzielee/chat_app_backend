@@ -49,6 +49,20 @@ async function chatRoutes(app, options) {
           recipientUsername: { type: "string" },
         },
       },
+      response: {
+        201: {
+          type: "object",
+          properties: {
+            chat: {
+              type: "object",
+              properties: {
+                _id: { type: "string" },
+                users: { type: "array" },
+              },
+            },
+          },
+        },
+      },
     },
     handler: async function (request, reply) {
       console.log("In post chat route");
