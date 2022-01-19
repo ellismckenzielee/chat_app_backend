@@ -1,9 +1,9 @@
 const users = [
-  { name: "Ellis", username: "ellislee" },
-  { name: "Zoe", username: "zoeharries" },
-  { name: "Harry", username: "harrywaterworth" },
-  { name: "Corey", username: "coreylee" },
-  { name: "Eddie", username: "eddivedder" },
+  { name: "Ellis", username: "ellislee", img: "" },
+  { name: "Zoe", username: "zoeharries", img: "" },
+  { name: "Harry", username: "harrywaterworth", img: "" },
+  { name: "Corey", username: "coreylee", img: "" },
+  { name: "Eddie", username: "eddivedder", img: "" },
 ];
 
 const chats = [
