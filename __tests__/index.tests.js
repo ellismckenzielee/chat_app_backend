@@ -86,6 +86,21 @@ describe("testing server endpoints: ", () => {
         await app.ready();
         return supertest(app.server).post("/users").send({ user: newUser }).expect(400);
       });
+      it("status: 409, responds with message: user already exists", async () => {
+        const newUser = {
+          name: "ellis",
+          username: "ellislee",
+        };
+        await app.ready();
+        return supertest(app.server)
+          .post("/users")
+          .send({ user: newUser })
+          .expect(409)
+          .then(({ body }) => {
+            const { msg } = body;
+            expect(msg).toBe("user already exists");
+          });
+      });
     });
   });
   describe("/users/:username", () => {
