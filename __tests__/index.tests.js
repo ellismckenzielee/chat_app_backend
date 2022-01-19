@@ -130,7 +130,7 @@ describe("testing server endpoints: ", () => {
       });
     });
     describe("POST", () => {
-      it("status: 201, responds with new chatId", async () => {
+      it("status: 201, responds with new chatId and users", async () => {
         const username = "ellislee";
         const recipientUsername = "coreylee";
         await app.ready();
@@ -139,8 +139,11 @@ describe("testing server endpoints: ", () => {
           .send({ recipientUsername })
           .expect(201)
           .then(({ body }) => {
-            const { chatId } = body;
-            expect(typeof chatId).toBe("string");
+            const { chat } = body;
+            const { _id, users } = chat;
+            console.log(body);
+            expect(typeof _id).toBe("string");
+            expect(users.length).toBe(2);
           });
       });
       it("status: 404, responds with user not found if recipient does not exist", async () => {
